@@ -120,17 +120,20 @@ def collect_year_data(year):
                 for race_num in range(1, 13):
                     race_id = f"{year}{place}{str(kai).zfill(2)}{str(day).zfill(2)}{str(race_num).zfill(2)}"
                     
+                    if int(race_id) < 201509040410:
+                        continue
+                    
                     # スクレイピング実行
                     success = scrape_and_save_race(race_id, conn)
                     
                     if not success:
                         empty_race_count += 1
                         # 1Rが存在しない場合は、その日自体が開催されていないと判断して次の日へ
-                        if race_num == 1:
+                        if race_num == 1 or 2:
                             break
                     
                     # 必須：サーバーへの優しさ（ランダムスリープ）
-                    time.sleep(random.uniform(2.0, 4.0))
+                    time.sleep(random.uniform(0.1, 2.0))
                 
                 # その日のレースが全く無かったら、その開催回は終了したとみなして次へ
                 if empty_race_count >= 12:
@@ -144,5 +147,5 @@ if __name__ == "__main__":
     # まずはテストとして特定の競馬場・短い期間に絞ることを推奨しますが、
     # 以下の関数で指定した年を丸ごと収集できます。
     # ※1年分回すのに数時間かかります。途中で止めても再開可能です。
-    for year in range(2006, 2026):
+    for year in range(2015, 2027):
         collect_year_data(year)
