@@ -9,7 +9,7 @@ print("Tables:", tables['name'].tolist())
 
 # Check race_info
 if 'race_info' in tables['name'].values:
-    info_df = pd.read_sql("SELECT * FROM race_info LIMIT 40000;", conn)
+    info_df = pd.read_sql("SELECT * FROM race_info LIMIT 100000;", conn)
     print("\nrace_info sample:")
     print(info_df)
     print("Total race_info rows:", pd.read_sql("SELECT COUNT(*) FROM race_info;", conn).iloc[0,0])
