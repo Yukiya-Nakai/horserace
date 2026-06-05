@@ -167,7 +167,7 @@ if __name__ == "__main__":
         else:
             print(f"⚠️ {name} のURLが見つかりませんでした")
             
-        time.sleep(random.uniform(0.5, 1.0))
+        time.sleep(random.uniform(1.0, 3.0))
 
     conn.close()
     print("🎉 競走馬データの収集が完了しました！")
